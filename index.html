@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estúdio de Tatuagem</title>
+  <style>
+    /* Reset e estilo base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #000;
+      color: #eee;
+      padding: 30px 0;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.8);
+    }
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 3px;
+      font-weight: 900;
+      text-shadow: 0 0 6px rgba(255,255,255,0.3);
+    }
+    header p {
+      font-style: italic;
+      margin-top: 8px;
+      color: #ccc;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+    }
+    nav {
+      background-color: #222;
+      padding: 18px 0;
+      text-align: center;
+      box-shadow: inset 0 -2px 4px rgba(255,255,255,0.1);
+      margin-bottom: 25px;
+    }
+    nav a {
+      margin: 0 22px;
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.25s ease;
+    }
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #fff;
+    }
+    .hero {
+      margin-bottom: 45px;
+    }
+    .banner-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-bottom: 4px solid #eee;
+      box-shadow: 0 0 30px rgba(255,255,255,0.15);
+    }
+    .container {
+      padding: 0 20px 50px;
+      max-width: 1100px;
+      margin: auto;
+      flex-grow: 1;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #eee;
+      text-shadow: 0 0 8px rgba(255,255,255,0.3);
+    }
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    .media-item {
+      background: #222;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(255,255,255,0.07);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .media-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(255,255,255,0.15);
+    }
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(10%) brightness(0.95);
+    }
+    .card-info {
+      background-color: #111;
+      padding: 18px 22px;
+      color: #ccc;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+      border-top: 1px solid #333;
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+    .card-info span {
+      color: #fff;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: 0.1em;
+    }
+    /* NOVA SESSÃO DE CARDS SERVIÇOS DO TATUADOR */
+    .servicos-tatuador {
+      max-width: 1100px;
+      margin: auto 0 80px;
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .servicos-tatuador .card-servico {
+      background: #222;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 25px rgba(255,255,255,0.08);
+      width: 220px;
+      text-align: center;
+      color: #ddd;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+      cursor: default;
+      user-select: none;
+      text-transform: uppercase;
+      font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .servicos-tatuador .card-servico:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 14px 40px rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    /* AGENDAMENTO */
+    #agendamento {
+      max-width: 600px;
+      margin: 0 auto 80px;
+      padding: 0 15px;
+    }
+    #agendamento h2 {
+      margin-bottom: 40px;
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #eee;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(255,255,255,0.3);
+    }
+    form.form-agendamento {
+      background: #222;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(255,255,255,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      color: #eee;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    form.form-agendamento label {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #ccc;
+    }
+    form.form-agendamento input {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1.5px solid #555;
+      background-color: #111;
+      color: #eee;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    form.form-agendamento input:focus {
+      outline: none;
+      border-color: #aaa;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+    form.form-agendamento button {
+      margin-top: 10px;
+      padding: 15px 0;
+      border: none;
+      border-radius: 50px;
+      background-color: #eee;
+      color: #111;
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    form.form-agendamento button:hover {
+      background-color: #ccc;
+      color: #000;
+    }
+    /* RODAPÉ PROFISSIONAL */
+    footer {
+      background-color: #000;
+      color: #aaa;
+      padding: 40px 20px 25px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      user-select: none;
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.05);
+    }
+    footer .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    footer .footer-section {
+      flex: 1 1 250px;
+      min-width: 220px;
+    }
+    footer h3 {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #eee;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 2px solid #444;
+      padding-bottom: 8px;
+    }
+    footer p,
+    footer a {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      display: block;
+      margin-bottom: 8px;
+    }
+    footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer .social-links a {
+      display: inline-block;
+      margin-right: 15px;
+      font-size: 1.5rem;
+      color: #aaa;
+      transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+      color: #fff;
+    }
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 10px;
+        font-size: 1rem;
+      }
+      .media-item img,
+      .media-item video {
+        height: 180px;
+      }
+      .servicos-tatuador {
+        justify-content: center;
+      }
+      .servicos-tatuador .card-servico {
+        width: 80%;
+        max-width: 320px;
+      }
+      footer .footer-container {
+        flex-direction: column;
+        gap: 25px;
+      }
+      footer .footer-section {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="inicio">
+    <h1>Estúdio de Tatuagem</h1>
+    <p>Tatuagens que contam histórias</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#portfolio">Portfólio</a>
+    <a href="#estilo">Estilo</a>
+    <a href="#agendamento">Agendamento</a>
+  </nav>
+
+  <section class="hero" id="estilo">
+    <img src="imgs/baner.png" alt="Banner do Estúdio" class="banner-img" />
+  </section>
+
+  <section class="container" id="portfolio">
+    <h2>Portfólio</h2>
+    <div class="galeria">
+      <div class="media-item">
+        <video controls>
+          <source src="imgs/video.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+        <div class="card-info">
+          <span>Vídeo:</span> Demonstração de traços finos e sombreamento realista.
+        </div>
+      </div>
+      <div class="media-item">
+        <img src="imgs/foto1.jpg" alt="Tatuagem Fechamento" />
+        <div class="card-info">
+          <span>Fechamento:</span> Tatuagem preta e cinza com detalhes elaborados e sombreado suave.
+        </div>
+      </div>
+      <div class="media-item">
+        <img src="imgs/foto2.jpg" alt="Tatuagem Realismo" />
+        <div class="card-info">
+          <span>Realismo:</span> Trabalho artístico com sombras e texturas realistas em alta definição.
+        </div>
+      </div>
+      <div class="media-item">
+        <video controls>
+          <source src="imgs/video2.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+        <div class="card-info">
+          <span>Vídeo:</span> Processo de criação mostrando técnica de linhas e preenchimentos.
+        </div>
+      </div>
+    </div>
+
+    <h2>O que o tatuador faz</h2>
+    <div class="servicos-tatuador">
+      <div class="card-servico">Tatuagem Profissional</div>
+      <div class="card-servico">Desenho Animado</div>
+      <div class="card-servico">Degradê</div>
+      <div class="card-servico">Realismo</div>
+      <div class="card-servico">Arte Tribal</div>
+      <div class="card-servico">Lettering</div>
+    </div>
+  </section>
+
+  <section id="agendamento" class="container">
+    <h2>Agende sua sessão</h2>
+    <form class="form-agendamento" action="#" method="post">
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" required />
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" required />
+      <label for="telefone">Telefone</label>
+      <input type="tel" id="telefone" name="telefone" required placeholder="(xx) xxxx-xxxx" />
+      <label for="data">Data desejada</label>
+      <input type="date" id="data" name="data" required />
+      <label for="hora">Horário</label>
+      <input type="time" id="hora" name="hora" required />
+      <button type="submit">Agendar</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Contato</h3>
+        <p>📞 (11) 99999-9999</p>
+        <p>✉️ contato@estudiotatuagem.com</p>
+        <p>📍 Rua das Artes, 123 - São Paulo, SP</p>
+      </div>
+      <div class="footer-section">
+        <h3>Horário</h3>
+        <p>Segunda a Sexta: 10h - 20h</p>
+        <p>Sábado: 10h - 18h</p>
+        <p>Domingo: Fechado</p>
+      </div>
+      <div class="footer-section">
+        <h3>Redes Sociais</h3>
+        <p class="social-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">📸 Instagram</a><br />
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">📘 Facebook</a><br />
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">🐦 Twitter</a>
+        </p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:30px; color:#555; font-size:0.8rem;">© 2025 Estúdio de Tatuagem. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Scroll suave para links do menu
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const id = anchor.getAttribute('href').substring(1);
+        const section = document.getElementById(id);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
